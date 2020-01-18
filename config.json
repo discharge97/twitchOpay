@@ -1,0 +1,14 @@
+{
+    "twitch": {
+        "username": "YOURUSERNAME",
+        "oauth": "oauth:TOKEN",
+        "joinMessage": "Donation bot has joined the chat!",
+        "showJoinMessage": false,
+        "debug": true
+    },
+    "webhook": {
+        "hostname": "127.0.0.1",
+        "port": 8080,
+        "OpayPublicKey": "OPAY_PUBLICKEY"
+    }
+}
