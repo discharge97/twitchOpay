@@ -21,17 +21,18 @@ const options = {
     channels: [config.twitch.username]
 };
 
+const client = new tmi.client(options);
 app.use(bodyParser.json());
 app.post('/', (req, res) => {
     console.log(req.body);
+    client.say(config.twitch.username, "<username> has donaited 5$! Thank you!");
     res.send("OK");
 });
 
 app.listen(config.webhook.port, () => console.log(`Webhook running on ${config.webhook.hostname}:${config.webhook.port}!`));
 
 
-const client = new tmi.client(options);
-// client.connect();
+client.connect();
 client.on('connected', (adress, port) => {
     if (config.twitch.showJoinMessage) {
         client.action(config.twitch.username, config.twitch.joinMessage);

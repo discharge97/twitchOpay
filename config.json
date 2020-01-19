@@ -1,6 +1,6 @@
 {
     "twitch": {
-        "username": "YOURUSERNAME",
+        "username": "USERNAME",
         "oauth": "oauth:TOKEN",
         "joinMessage": "Donation bot has joined the chat!",
         "showJoinMessage": false,
