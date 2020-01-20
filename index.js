@@ -15,17 +15,17 @@ const options = {
         reconnect: true,
     },
     identity: {
-        username: config.twitch.username,
+        username: config.twitch.bot_username,
         password: config.twitch.oauth
     },
-    channels: [config.twitch.username]
+    channels: [config.twitch.channel]
 };
 
 const client = new tmi.client(options);
 app.use(bodyParser.json());
 app.post('/', (req, res) => {
     console.log(req.body);
-    client.say(config.twitch.username, "<username> has donaited 5$! Thank you!");
+    client.say(config.twitch.channel, "<username> has donaited 5$! Thank you!");
     res.send("OK");
 });
 
@@ -35,6 +35,6 @@ app.listen(config.webhook.port, () => console.log(`Webhook running on ${config.w
 client.connect();
 client.on('connected', (adress, port) => {
     if (config.twitch.showJoinMessage) {
-        client.action(config.twitch.username, config.twitch.joinMessage);
+        client.action(config.twitch.channel, config.twitch.joinMessage);
     }
 });

@@ -1,9 +1,10 @@
 {
     "twitch": {
-        "username": "USERNAME",
+        "bot_username": "BOT_USERNAME",
+        "channel": "CHANNEL_NAME",
         "oauth": "oauth:TOKEN",
         "joinMessage": "Donation bot has joined the chat!",
-        "showJoinMessage": false,
+        "showJoinMessage": true,
         "debug": true
     },
     "webhook": {
