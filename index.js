@@ -46,6 +46,11 @@ app.get('/', (req, res) => {
         res.redirect(`http://${config.webhook.hostname}:${config.webhook.port}`);
 });
 
+app.post('/', (req, res) => {
+    if (req.protocol == 'https')
+        res.redirect(`http://${config.webhook.hostname}:${config.webhook.port}`);
+});
+
 // app.listen(config.webhook.port, () => console.log(`Webhook running on ${config.webhook.hostname}:${config.webhook.port}!`));
 
 client.connect();
