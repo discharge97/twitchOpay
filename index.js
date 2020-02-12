@@ -23,6 +23,10 @@ const options = {
 };
 
 const client = new tmi.client(options);
+
+const https = require('https').createServer(options, app);
+const http = require('http').createServer(app);
+
 app.use(cors());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -30,18 +34,26 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(bodyParser.json());
+
 app.post('/', (req, res) => {
     console.log(req.body);
-    // client.say(config.twitch.channel, "<username> has donaited 5$! Thank you!");
+    client.say(config.twitch.channel, `New donation!`);
     res.send("OK");
 });
 
-app.listen(config.webhook.port, () => console.log(`Webhook running on ${config.webhook.hostname}:${config.webhook.port}!`));
+app.get('/', (req, res) => {
+    if (req.protocol == 'https')
+        res.redirect(`http://${config.webhook.hostname}:${config.webhook.port}`);
+});
 
+// app.listen(config.webhook.port, () => console.log(`Webhook running on ${config.webhook.hostname}:${config.webhook.port}!`));
 
-// client.connect();
+client.connect();
 client.on('connected', (adress, port) => {
     if (config.twitch.showJoinMessage) {
         client.action(config.twitch.channel, config.twitch.joinMessage);
     }
 });
+
+http.listen(config.webhook.port, () => console.log(`Server started at ${config.webhook.hostname}:${config.webhook.port}`));
+https.listen(433, () => console.log(`Redirect to HTTP from ${config.webhook.hostname}:443`));

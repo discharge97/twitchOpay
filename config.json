@@ -9,7 +9,7 @@
     },
     "webhook": {
         "hostname": "127.0.0.1",
-        "port": 8080,
+        "port": 80,
         "OpayPublicKey": "OPAY_PUBLICKEY"
     }
 }
